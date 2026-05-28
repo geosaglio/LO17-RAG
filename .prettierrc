@@ -1,0 +1,32 @@
+{
+    "arrowParens": "always",
+    "bracketSameLine": false,
+    "objectWrap": "preserve",
+    "bracketSpacing": false,
+    "semi": true,
+    "experimentalOperatorPosition": "start",
+    "experimentalTernaries": false,
+    "singleQuote": false,
+    "jsxSingleQuote": false,
+    "quoteProps": "as-needed",
+    "trailingComma": "all",
+    "singleAttributePerLine": false,
+    "htmlWhitespaceSensitivity": "css",
+    "vueIndentScriptAndStyle": false,
+    "proseWrap": "preserve",
+    "insertPragma": false,
+    "printWidth": 80,
+    "requirePragma": false,
+    "tabWidth": 4,
+    "useTabs": false,
+    "embeddedLanguageFormatting": "auto",
+
+    "overrides": [
+        {
+            "files": ["*.html", "*.yml"],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}
