@@ -7,6 +7,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 
+# Configuration centralisée du projet.
+# Ce module lit les variables d'environnement et fournit
+# des valeurs par défaut faciles à ajuster pour l'application.
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -28,6 +31,8 @@ class Settings:
     chunk_size: int = 1200
     chunk_overlap: int = 180
     retriever_k: int = 5
+    min_relevance_score: float = 0.0
+    rerank_overlap_weight: float = 0.2
     max_pages: int = 25
     embedding_batch_size: int = 8
     embedding_sleep_seconds: float = 1.0
@@ -35,6 +40,7 @@ class Settings:
 
 
 def load_settings() -> Settings:
+    # Charge les variables définies dans .env puis lit l'environnement.
     load_dotenv()
 
     llm_base_url = os.getenv("LLM_BASE_URL", "").strip()
@@ -79,5 +85,11 @@ def load_settings() -> Settings:
         ),
         embedding_max_retries=int(
             os.getenv("EMBEDDING_MAX_RETRIES", Settings.embedding_max_retries)
+        ),
+        min_relevance_score=float(
+            os.getenv("MIN_RELEVANCE_SCORE", Settings.min_relevance_score)
+        ),
+        rerank_overlap_weight=float(
+            os.getenv("RERANK_OVERLAP_WEIGHT", Settings.rerank_overlap_weight)
         ),
     )

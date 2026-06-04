@@ -10,9 +10,16 @@ from langchain_community.vectorstores import Chroma
 
 from rag_pi.config import Settings
 
+# Stockage des embeddings et des vecteurs.
+# Ce module rend possible la conversion de texte en embeddings et la création du store Chroma pour la recherche vectorielle.
+
 
 class SingleTextOpenAICompatibleEmbeddings(Embeddings):
-    """Embeddings client for servers that fail on batched OpenAI SDK calls."""
+    """Client d'embeddings simple pour serveurs OpenAI-compatible.
+
+    Certains serveurs ne gèrent pas bien les appels groupés. Cette classe
+    sait faire un appel à la fois si nécessaire.
+    """
 
     def __init__(
         self,
@@ -28,9 +35,11 @@ class SingleTextOpenAICompatibleEmbeddings(Embeddings):
         self.api_format = api_format
 
     def embed_query(self, text: str) -> list[float]:
+        # Embeddings pour une requête unique.
         return self._embed_one(text)
 
     def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        # Embeddings pour plusieurs textes. On prend en charge plusieurs formats.
         if self.api_format == "ollama_embed":
             vector = self._post({"model": self.model, "input": texts})
             if isinstance(vector[0], list):
@@ -44,6 +53,7 @@ class SingleTextOpenAICompatibleEmbeddings(Embeddings):
         return self._post(payload)
 
     def _post(self, payload: dict[str, Any]) -> list[float] | list[list[float]]:
+        # Envoie la requête HTTP au service d'embeddings.
         response = requests.post(
             self.url,
             headers={
@@ -75,6 +85,7 @@ class SingleTextOpenAICompatibleEmbeddings(Embeddings):
         max_retries: int = 5,
         base_sleep_seconds: float = 1.0,
     ) -> list[list[float]]:
+        # Réessaie l'appel en cas d'erreur réseau temporaire.
         for attempt in range(max_retries + 1):
             try:
                 return self.embed_documents(texts)
@@ -109,6 +120,7 @@ class SingleTextOpenAICompatibleEmbeddings(Embeddings):
 
 
 def build_embeddings(settings: Settings) -> SingleTextOpenAICompatibleEmbeddings:
+    # Crée un client d'embeddings à partir des paramètres du projet.
     return SingleTextOpenAICompatibleEmbeddings(
         base_url=settings.embedding_base_url,
         api_key=settings.embedding_api_key,
@@ -119,6 +131,7 @@ def build_embeddings(settings: Settings) -> SingleTextOpenAICompatibleEmbeddings
 
 
 def load_vectorstore(settings: Settings) -> Chroma:
+    # Initialise le dossier Chroma et retourne le store prêt à l'emploi.
     settings.chroma_dir.mkdir(parents=True, exist_ok=True)
     return Chroma(
         collection_name=settings.collection_name,

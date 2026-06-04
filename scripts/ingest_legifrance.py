@@ -9,6 +9,10 @@ from rag_pi.config import load_settings
 from rag_pi.loaders import crawl_legifrance_code
 from rag_pi.vectorstore import build_embeddings, load_vectorstore
 
+# Script d'ingestion chargé de récupérer le texte Legifrance,
+# de le découper en chunks, de calculer les embeddings et de les
+# stocker dans Chroma.
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Ingestion Legifrance vers Chroma.")
@@ -18,6 +22,7 @@ def main() -> None:
     settings = load_settings()
     docs = crawl_legifrance_code(settings.legifrance_url, max_pages=settings.max_pages)
 
+    # Sépare les longs textes en morceaux plus petits pour Chroma.
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=settings.chunk_size,
         chunk_overlap=settings.chunk_overlap,
@@ -30,6 +35,8 @@ def main() -> None:
         vectorstore.delete_collection()
         vectorstore = load_vectorstore(settings)
     embeddings = vectorstore._embedding_function or build_embeddings(settings)
+
+    # Ajoute les vecteurs et docs à la collection Chroma par lots.
 
     ids = [_stable_id(chunk, index) for index, chunk in enumerate(chunks)]
     for start in range(0, len(chunks), settings.embedding_batch_size):
@@ -63,6 +70,9 @@ def main() -> None:
     vectorstore.persist()
 
     print(f"Ingestion terminee: {len(docs)} documents sources, {len(chunks)} chunks.")
+
+
+def _stable_id(chunk, index: int) -> str:
 
 
 def _stable_id(chunk, index: int) -> str:

@@ -7,45 +7,20 @@ import requests
 from bs4 import BeautifulSoup
 from langchain_core.documents import Document
 
+# Ce module charge les pages Legifrance et transforme les articles en documents structurés pour Chroma.
+
 
 DEFAULT_HEADERS = {
     "User-Agent": "lo17-rag-pi/0.1 (+https://www.utc.fr; educational project)"
 }
 
 
-def load_legifrance_code(url: str) -> list[Document]:
-    """Load the public Legifrance code page and split it by visible article blocks."""
-    response = requests.get(url, headers=DEFAULT_HEADERS, timeout=30)
-    response.raise_for_status()
-
-    soup = BeautifulSoup(response.text, "html.parser")
-    page_title = soup.title.get_text(" ", strip=True) if soup.title else "Code de la propriete intellectuelle"
-
-    for element in soup(["script", "style", "noscript", "svg"]):
-        element.decompose()
-
-    article_nodes = soup.select("article.js-article-content-to-copy")
-    docs = _documents_from_articles(article_nodes, url, page_title)
-    if docs:
-        return docs
-
-    main = soup.select_one("main") or soup.body or soup
-    text = _clean_text(main.get_text("\n", strip=True))
-    return [
-        Document(
-            page_content=text,
-            metadata={
-                "source": url,
-                "title": page_title,
-                "article_id": "",
-                "article_title": page_title,
-            },
-        )
-    ]
-
-
 def crawl_legifrance_code(start_url: str, max_pages: int = 25) -> list[Document]:
-    """Crawl public Legifrance code pages reachable from the entry URL."""
+    """Explore les pages du code via Legifrance et renvoie des documents.
+
+    Le crawler suit les liens internes dans le Code de la propriété intellectuelle
+    et collecte les parties d'articles pertinentes.
+    """
     queue = deque([start_url])
     visited: set[str] = set()
     seen_article_ids: set[str] = set()
@@ -104,6 +79,7 @@ def crawl_legifrance_code(start_url: str, max_pages: int = 25) -> list[Document]
 
 
 def _documents_from_articles(nodes, base_url: str, page_title: str) -> list[Document]:
+    # Transforme chaque bloc d'article HTML en document LangChain.
     docs: list[Document] = []
     seen: set[str] = set()
 
@@ -153,6 +129,7 @@ def _documents_from_articles(nodes, base_url: str, page_title: str) -> list[Docu
 
 
 def _article_id_from_link(node) -> str:
+    # Tente d'extraire l'identifiant d'article à partir d'un lien LEGIARTI.
     link = node.select_one("a[href*='LEGIARTI']")
     if not link:
         return ""
@@ -162,6 +139,7 @@ def _article_id_from_link(node) -> str:
 
 
 def _nearest_heading(node) -> str:
+    # Si l'article ne contient pas de titre explicite, on cherche un titre proche.
     heading = node.find(["h1", "h2", "h3", "h4"])
     if heading:
         return heading.get_text(" ", strip=True)
@@ -199,6 +177,7 @@ def _legifrance_links(soup: BeautifulSoup, current_url: str, start_url: str) -> 
 
 
 def _should_keep_fallback_document(url: str, start_url: str) -> bool:
+    # Détermine si on garde un document de secours quand aucun article n'est trouvé.
     parsed = urlparse(url)
     start_path = urlparse(start_url).path
     if parsed.path == start_path or parsed.path.startswith(start_path + "/"):

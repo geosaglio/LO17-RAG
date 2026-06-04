@@ -1,18 +1,26 @@
-# LO17 RAG Propriete intellectuelle
+# LO17 RAG Propriété intellectuelle
 
-Projet Python de RAG pour aider les utilisateurs a interroger le Code de la propriete intellectuelle depuis Legifrance.
+Assistant RAG pour interroger le Code de la propriété intellectuelle via Legifrance.
 
-L'ancien projet JavaScript est conserve dans `src/` pour consultation. La nouvelle implementation utilise LangChain, une API OpenAI-compatible, ChromaDB et Streamlit.
+Ce projet permet de :
+- ingérer les textes du Code depuis Legifrance
+- indexer les documents dans Chroma
+- utiliser un LLM OpenAI-compatible pour répondre aux questions
+- afficher les résultats dans Streamlit
+- évaluer le système avec un jeu de cas structuré
+- scorer et reranker les documents pertinents
 
-## Stack
+## Nettoyage et choix projet
 
-- `langchain-core`, `langchain`, `langchain-community`
-- `langchain-openai` pour le LLM et les embeddings via une API OpenAI-compatible
-- `chromadb` via le vector store Chroma
-- `streamlit` pour l'application
-- `beautifulsoup4` et `requests` pour l'ingestion Legifrance
+Le projet est maintenant épuré :
+- seuls les composants utiles sont conservés
+- les scripts d'exploration inutilisés ont été supprimés
+- la logique RAG, l'évaluation et l'UI restent au centre
+- le notebook externe n'est pas conservé dans la version de soutenance
 
-## Installation
+## Dépendances
+
+Installer l'environnement et les dépendances :
 
 ```powershell
 python -m venv .venv
@@ -20,43 +28,86 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-Copier `.env.example` vers `.env`, puis renseigner `LLM_API_KEY` et `EMBEDDING_API_KEY`.
+## Configuration
 
-## Ingestion Legifrance
+Copier `.env.example` vers `.env` et renseigner les variables :
+
+- `LLM_BASE_URL` : endpoint UTC API, par exemple `https://ia.beta.utc.fr/api`
+- `LLM_API_KEY` : clé UTC pour le modèle
+- `EMBEDDING_BASE_URL` : endpoint embeddings
+- `EMBEDDING_API_KEY` : clé embeddings
+- `LLM_MODEL` : modèle à utiliser, ex. `RedHatAI/gemma-4-31B-it-NVFP4`
+
+Paramètres RAG importants :
+
+- `CHUNK_SIZE` : taille d'un segment de texte
+- `CHUNK_OVERLAP` : chevauchement entre segments
+- `RETRIEVER_K` : nombre de documents récupérés
+- `MIN_RELEVANCE_SCORE` : seuil minimal de pertinence
+- `RERANK_OVERLAP_WEIGHT` : bonus de reranking lexical
+
+## Commandes principales
+
+### Ingestion des données
 
 ```powershell
 python -m scripts.ingest_legifrance --reset
 ```
 
-La commande scrape la page `LEGIFRANCE_URL`, parcourt les liens internes du Code de la propriete intellectuelle, decoupe les textes et alimente Chroma dans `chroma_db/`.
-
-## Lancer l'application
+### Lancer l'interface
 
 ```powershell
 streamlit run streamlit_app.py
 ```
 
-## Evaluation
+### Évaluation
 
 ```powershell
 python -m scripts.evaluate_rag
 ```
 
-Les resultats sont ecrits dans `evaluation/results/latest.json`.
+Les résultats sont enregistrés dans :
+- `evaluation/results/latest.json`
+- `evaluation/results/latest.csv`
 
-L'evaluation initiale verifie des cas simples de pertinence et un cas anti-hallucination. Elle doit etre enrichie avec un jeu de questions attendu plus complet.
+## Scoring et évaluation
 
-## Structure
+Le pipeline utilise :
+- des embeddings OpenAI-compatible
+- le vectorstore Chroma
+- un reranking explicite basé sur la similarité et l'overlap lexical
+- un seuil de pertinence configurable
+- une évaluation structurée de cas factuels et de refus
 
-- `rag_pi/config.py`: configuration et variables d'environnement
-- `rag_pi/loaders.py`: scraping Legifrance
-- `rag_pi/vectorstore.py`: embeddings OpenAI-compatible et Chroma
-- `rag_pi/rag.py`: retrieval, prompt et generation
-- `rag_pi/evaluation.py`: evaluation minimale du RAG
-- `scripts/ingest_legifrance.py`: ingestion Chroma
-- `scripts/evaluate_rag.py`: execution de l'evaluation
-- `streamlit_app.py`: interface utilisateur
+### Résultats d'évaluation
 
-## Deploiement
+- supervision par termes attendus
+- reconnaissance des sources citées
+- détection des réponses de refus/hallucination
+- mesures de grounding et de correspondance
 
-Le deploiement n'est pas active pour l'instant. La cible la plus simple sera Streamlit Community Cloud ou un serveur Python classique avec les variables d'environnement configurees.
+## Architecture du projet
+
+- `rag_pi/config.py` : paramètres de configuration et variables d'environnement
+- `rag_pi/loaders.py` : scraping et parsing Legifrance
+- `rag_pi/vectorstore.py` : construction du store Chroma et client d'embeddings
+- `rag_pi/rag.py` : récupération, reranking et génération de réponses
+- `rag_pi/prompts.py` : prompt RAG spécifique au domaine juridique
+- `rag_pi/evaluation_cases.py` : définition des cas d'évaluation
+- `rag_pi/evaluation.py` : pipeline d'évaluation et scoring
+- `scripts/ingest_legifrance.py` : ingestion des documents dans Chroma
+- `scripts/evaluate_rag.py` : exécution de l'évaluation
+- `streamlit_app.py` : interface utilisateur Streamlit
+
+## À présenter en soutenance
+
+- architecture claire et modulaire
+- intégration à l'API UTC pour LLM et embeddings
+- scoring des documents et reranking visible côté UI
+- évaluation automatisée et exportable JSON/CSV
+- test de refus/hallucination pour éviter les réponses inventées
+
+## Notes
+
+- Le projet se concentre sur un pipeline RAG réaliste et compréhensible.
+- Les composants superflus ont été retirés pour garder un dossier propre.
