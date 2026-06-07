@@ -1,0 +1,31 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\babel@toc {french}{}\relax 
+\contentsline {chapter}{Introduction}{2}{chapter*.2}%
+\contentsline {paragraph}{Contexte}{2}{paragraph*.3}%
+\contentsline {paragraph}{Problématique}{2}{paragraph*.4}%
+\contentsline {paragraph}{Objectifs}{2}{paragraph*.5}%
+\contentsline {paragraph}{Plan du rapport}{2}{paragraph*.6}%
+\contentsline {chapter}{\numberline {1}Choix du sujet et préparation du corpus}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivation du sujet}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Source des données : Legifrance}{3}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Ingestion et nettoyage du corpus}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Statistiques du corpus}{3}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Architecture et pipeline RAG}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Vue d'ensemble du pipeline}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Chunking et indexation}{4}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Récupération et reranking}{4}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Génération de la réponse}{4}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Choix techniques principaux}{4}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Évaluation et gestion des hallucinations}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Protocole d'évaluation}{5}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Mise en oeuvre}{5}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Résultats}{5}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Gestion des hallucinations}{5}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Application Streamlit et déploiement}{6}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Interface utilisateur}{6}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Configuration et reproductibilité}{6}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Déploiement (bonus)}{6}{section.4.3}%
+\contentsline {chapter}{Conclusion}{7}{chapter*.7}%
+\contentsline {paragraph}{Résumé du travail}{7}{paragraph*.8}%
+\contentsline {paragraph}{Bilan}{7}{paragraph*.9}%
+\contentsline {paragraph}{Contributions}{7}{paragraph*.10}%

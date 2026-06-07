@@ -1,0 +1,39 @@
+\documentclass[11pt]{report}
+\usepackage{lib/utc-report-template}
+\usepackage{lib/glossaire}
+
+% Meta informations
+\author{Géo SAGLIO \\
+        Matéo GROS \\
+        Mathilde WALLUT \\
+        Julien HELLEC}
+\title{LO17/AI31 -- Projet RAG sur le Code de la propriété intellectuelle}
+
+\setcounter{secnumdepth}{2}
+
+
+\begin{document}
+    % Import des macros si besoin
+    \include{lib/macro}
+
+    %Creation de la page de garde
+    \frontpage
+
+
+    \pagenumbering{arabic}
+
+    % Ne pas afficher les sous-sections dans la table des matières : 0=chapitre, 1=section, 2=sous-section
+    \setcounter{tocdepth}{1}
+
+    % Sommaire
+    \tableofcontents
+
+    % Les parties du rapport
+    \include{parts/Introduction}
+    \include{parts/1-Sujet_corpus}
+    \include{parts/2-Architecture_RAG}
+    \include{parts/3-Evaluation_hallucinations}
+    \include{parts/4-Application_Streamlit}
+    \include{parts/Conclusion}
+
+\end{document}

@@ -1,0 +1,53 @@
+\chapter{Évaluation et gestion des hallucinations}
+
+% Partie consacrée à la qualité du RAG et à la détection / prévention
+% des hallucinations.
+
+\section{Protocole d'évaluation}
+% - Présentation du jeu de cas d'évaluation
+%   (cf. \texttt{rag\_pi/evaluation\_cases.py}).
+% - Types de cas : questions factuelles, questions hors-sujet, questions
+%   pièges (refus attendu).
+% - Métriques :
+%   \begin{itemize}
+%     \item présence des termes attendus dans la réponse,
+%     \item reconnaissance des sources / articles cités,
+%     \item détection des réponses de refus,
+%     \item grounding (réponse appuyée sur les documents retournés).
+%   \end{itemize}
+
+\section{Mise en oeuvre}
+% - Script \texttt{scripts/evaluate\_rag.py}.
+% - Sortie : \texttt{evaluation/results/latest.json}
+%   et \texttt{evaluation/results/latest.csv}.
+% - Exécution reproductible.
+
+\section{Résultats}
+% - Tableau de résultats par type de cas.
+% - Discussion : forces, points faibles, sensibilité aux paramètres
+%   (\texttt{CHUNK\_SIZE}, \texttt{RETRIEVER\_K}, seuil de pertinence).
+
+% Exemple de tableau à remplir :
+%\begin{table}[ht]
+%    \centering
+%    \begin{tabular}{lcc}
+%        \hline
+%        Type de cas & Précision & Taux de refus correct \\
+%        \hline
+%        Factuels & \dots & \dots \\
+%        Pièges / hors-sujet & \dots & \dots \\
+%        \hline
+%    \end{tabular}
+%    \caption{Résultats d'évaluation par catégorie.}
+%    \label{tab:eval}
+%\end{table}
+
+\section{Gestion des hallucinations}
+% - Stratégies mises en place :
+%   \begin{itemize}
+%     \item seuil minimal de pertinence,
+%     \item prompt forçant la citation des articles,
+%     \item refus explicite quand aucun document pertinent n'est trouvé,
+%     \item affichage des sources dans l'interface.
+%   \end{itemize}
+% - Cas concrets observés (avant / après).

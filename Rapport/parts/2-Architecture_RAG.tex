@@ -1,0 +1,33 @@
+\chapter{Architecture et pipeline RAG}
+
+% Partie technique : décrire le pipeline complet du RAG mis en place.
+
+\section{Vue d'ensemble du pipeline}
+% Schéma global :
+% Documents Legifrance -> chunking -> embeddings -> Chroma
+% Question -> embeddings -> retrieval -> reranking -> prompt -> LLM -> réponse
+% Idéalement insérer une figure d'architecture.
+
+\section{Chunking et indexation}
+% - Stratégie de découpage (\texttt{CHUNK\_SIZE}, \texttt{CHUNK\_OVERLAP}).
+% - Choix des paramètres et justification.
+% - Embeddings : modèle utilisé via l'API UTC.
+% - Stockage dans Chroma (cf. \texttt{rag\_pi/vectorstore.py}).
+
+\section{Récupération et reranking}
+% - Recherche par similarité dans Chroma (\texttt{RETRIEVER\_K}).
+% - Reranking explicite : similarité vectorielle + bonus d'overlap lexical
+%   (\texttt{RERANK\_OVERLAP\_WEIGHT}).
+% - Seuil de pertinence (\texttt{MIN\_RELEVANCE\_SCORE}) pour filtrer les
+%   documents peu pertinents.
+% - Cf. \texttt{rag\_pi/rag.py}.
+
+\section{Génération de la réponse}
+% - Prompt RAG dédié au domaine juridique (cf. \texttt{rag\_pi/prompts.py}).
+% - Contraintes imposées au modèle : citations d'articles, refus si pas
+%   d'information suffisante.
+% - Modèle utilisé (variable \texttt{LLM\_MODEL}) et endpoint UTC.
+
+\section{Choix techniques principaux}
+% Tableau ou liste des bibliothèques :
+% LangChain, LangChain Google GenAI / OpenAI-compatible, Chroma, Streamlit.
