@@ -8,7 +8,7 @@
 %   nécessité de citations).
 % - Public cible : étudiants, créateurs, ingénieurs confrontés à des questions
 %   de PI.
-L'origine de ce projet tient à la situation concrète d'un membre du groupe, inscrit à l'UV GE28 portant sur le droit de la propriété intellectuelle. Cette matière exige des références constantes à des textes législatifs, ce qui rend la révision laborieuse sans un outil capable de retrouver rapidement l'article pertinent parmi des centaines de dispositions.
+L'origine de ce projet tient à la situation concrète d'un membre du groupe, inscrit à l'UV GE28 portant sur le droit de la propriété intellectuelle. Cette matière exige des références constantes à des textes législatifs, ce qui rend la révision laborieuse sans un outil capable de retrouver rapidement l'article pertinent parmi des centaines.
 
 Le droit constitue un terrain d'application particulièrement adapté aux systèmes RAG. D'une part, l'ensemble du corpus est structuré et officiellement sourcé~: toute affirmation doit pouvoir s'appuyer sur un article précis, ce qui exclut par nature toute réponse inventée. D'autre part, le volume des textes législatifs rend leur lecture exhaustive inaccessible à quiconque n'exerce pas le droit à titre professionnel. Un assistant capable d'interroger ce corpus et de citer ses sources répond ainsi directement à ces deux contraintes.
 
@@ -19,10 +19,9 @@ Le droit constitue un terrain d'application particulièrement adapté aux systè
 % - Justification du choix d'une source officielle (qualité, fraîcheur,
 %   traçabilité).
 Le site choisi pour réaliser le RAG est le site officiel du gouvernement français \url{https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006069414}.
-
 Ce dernier contient 915 articles distincts traitant du Code de la Propriété Intellectuelle, séparé en trois parties distinctes : la propriété littéraire et artistique, la propriété industrielle et les dispositions relatives à l'Outre-mer. Le site est régulièrement mis à jour et les articles abrogés sont supprimés, les informations renvoyées par le RAG sont donc nécessairement d'actualité.
 
-\section{Ingestion et nettoyage du corpus}
+\section{Ingestion et nettoyage du corpus}\label{sec:crawler}
 % - Description du script \texttt{scripts/ingest\_legifrance.py}.
 % - Étapes : récupération, parsing HTML, extraction du texte par article,
 %   construction des métadonnées (numéro d'article, livre, lien source).

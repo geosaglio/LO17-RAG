@@ -7,6 +7,16 @@
 % Documents Legifrance -> chunking -> embeddings -> Chroma
 % Question -> embeddings -> retrieval -> reranking -> prompt -> LLM -> réponse
 % Idéalement insérer une figure d'architecture.
+Ce projet de RAG se découpe en 2 phases distinctes, l'extraction depuis les données sources et la réponse aux questions.2
+
+\subsection{Phase d'extraction}
+Le crawler (\ref{sec:crawler}) constitue le point d'entrée du pipeline, il permet la récupération rapide du contenu entier du site de legifrance et fourni une sortie sous forme de document \texttt{Langchain} pour chaque article du code.
+Les documents \texttt{LangChain}, passe ensuite par une étape de chuncking et de tokenisation car le modèle d'embedding n'est pas en mesure d'assimiler toutes les données en même temps. Cette étape nous permet de partitionner en différent batch
+
+\subsection{Phase de génération des réponses}
+
+Voici un schéma d'ensemble qui permet d'avoir une vision d'ensemble du pipeline:
+** INCLURE FIGURE **
 
 \section{Chunking et indexation}
 % - Stratégie de découpage (\texttt{CHUNK\_SIZE}, \texttt{CHUNK\_OVERLAP}).
