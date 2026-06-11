@@ -10,7 +10,6 @@ from rag_pi.evaluation import evaluate
 # Script simple pour exécuter l'évaluation du système RAG.
 # Il enregistre les résultats en JSON et CSV pour analyse.
 
-
 def main() -> None:
     settings = load_settings()
     results = evaluate(settings)

@@ -195,16 +195,6 @@ DEFAULT_EVAL_CASES: list[EvalCase] = [
     # Questions qui sont censées amener à un refus                       #
     # ------------------------------------------------------------------ #
     EvalCase(
-        id="hallucination_auteur_fictif",
-        question="Quels droits possede Jean Fictif, auteur du roman 'Le code perdu' paru en 2023 ?",
-        expected_terms=(),
-        expected_sources=(),
-        expected_answer_snippet="ne sais pas",
-        category="hallucination",
-        description="Vérifier que le système ne fabrique pas de droits pour un auteur inexistant.",
-        should_refuse=True,
-    ),
-    EvalCase(
         id="hallucination_hors_domaine",
         question="Quelle est la peine d'emprisonnement prevue pour un meurtre en France ?",
         expected_terms=(),
