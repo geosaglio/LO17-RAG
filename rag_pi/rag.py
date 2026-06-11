@@ -76,7 +76,9 @@ def _retrieve_documents(
         try:
             docs_with_scores = vectorstore.similarity_search_with_score(question, k=k)
             if docs_with_scores:
-                return docs_with_scores
+                # Chroma returns a distance (lower = better); convert to similarity (higher = better)
+                # so the rest of the pipeline (sort descending, filter >= threshold) is consistent.
+                return [(doc, 1.0 / (1.0 + dist)) for doc, dist in docs_with_scores]
         except Exception:
             pass
 
