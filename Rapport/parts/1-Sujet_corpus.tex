@@ -27,6 +27,13 @@ Ce dernier contient 915 articles distincts traitant du Code de la Propriété In
 % - Étapes : récupération, parsing HTML, extraction du texte par article,
 %   construction des métadonnées (numéro d'article, livre, lien source).
 % - Nettoyage : suppression des éléments parasites, normalisation.
+La collecte des données juridiques repose sur un crawler développé spécifiquement pour le site Legifrance. La fonction \texttt{crawl\_legifrance\_code} constitue le point d'entrée du pipeline : à partir de l'URL de départ, elle explore récursivement les pages du code en suivant les liens internes, dans la limite d'un nombre maximal de pages paramétrable.
+
+La navigation est guidée par la \texttt{fonction\_legifrance\_links}, qui filtre les hyperliens extraits de chaque page afin de ne conserver que ceux appartenant au même code juridique. Ce filtrage s'appuie sur la comparaison des chemins d'URL avec le chemin de départ, garantissant que le crawler ne dérive pas vers des ressources extérieures.
+
+L'extraction du contenu est assurée par \texttt{\_documents\_from\_articles}, qui parcourt les blocs HTML correspondant aux articles et les convertit en objets Document compatibles avec LangChain. Chaque article est enrichi de métadonnées structurées : son identifiant juridique officiel (de la forme LEGIARTI...), extrait via \texttt{\_article\_id\_from\_link} depuis les ancres de type LEGIARTI présentes dans les liens, ainsi que son titre, récupéré soit directement depuis le bloc d'article, soit par remontée dans l'arborescence HTML grâce à \texttt{\_nearest\_heading} lorsqu'aucun titre explicite n'est présent.
+
+Enfin, le texte brut de chaque article est normalisé par la fonction \texttt{\_clean\_text}, qui supprime les lignes vides et les espaces superflus, produisant un contenu propre et homogène avant l'étape d'embedding.
 
 
 %\begin{figure}[ht]
