@@ -71,10 +71,6 @@ def main() -> None:
 
     print(f"Ingestion terminee: {len(docs)} documents sources, {len(chunks)} chunks.")
 
-
-def _stable_id(chunk, index: int) -> str:
-
-
 def _stable_id(chunk, index: int) -> str:
     article_id = chunk.metadata.get("article_id") or "page"
     return f"{article_id}-{index}"
