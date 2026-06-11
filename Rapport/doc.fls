@@ -397,6 +397,11 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/french.lbx
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/french.lbx
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/biblatex/lbx/french.lbx
 OUTPUT doc.bcf
+INPUT doc.bbl
+INPUT ./doc.bbl
+INPUT ./doc.bbl
+INPUT ./doc.bbl
+INPUT doc.bbl
 INPUT ./doc.out
 INPUT ./doc.out
 INPUT doc.out

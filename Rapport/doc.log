@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.28)  7 JUN 2026 11:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.28)  11 JUN 2026 12:19
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
 **doc.tex
 (./doc.tex
@@ -1432,13 +1432,13 @@ Package biblatex Info: Automatic encoding selection.
 \openout5 = `doc.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'doc.bbl' not found.
+Package biblatex Info: ... file 'doc.bbl' found.
 
-No file doc.bbl.
+(./doc.bbl)
 Package biblatex Info: Reference section=0 on input line 15.
 Package biblatex Info: Reference segment=0 on input line 15.
 Package hyperref Info: Link coloring OFF on input line 15.
-(./doc.out) (./doc.out)
+ (./doc.out) (./doc.out)
 \@outlinefile=\write8
 \openout8 = `doc.out'.
 
@@ -1455,8 +1455,8 @@ Package epstopdf Info: Source file: <assets/UTC.eps>
 (epstopdf)             Output file: <assets/UTC-eps-converted-to.pdf>
 (epstopdf)                    date: 2026-06-07 11:57:11
 (epstopdf)                    size: 2675 bytes
-(epstopdf)             Command: <epstopdf --outfile=assets/UTC-eps-converted-to
-.pdf assets/UTC.eps>
+(epstopdf)             Command: <repstopdf --outfile=assets/UTC-eps-converted-t
+o.pdf assets/UTC.eps>
 (epstopdf)             \includegraphics on input line 8.
 Package epstopdf Info: Output file is already uptodate.
 <assets/UTC-eps-converted-to.pdf, id=95, 88.33pt x 68.255pt>
@@ -1525,8 +1525,8 @@ Package epstopdf Info: Source file: <assets/UTC.eps>
 (epstopdf)             Output file: <assets/UTC-eps-converted-to.pdf>
 (epstopdf)                    date: 2026-06-07 11:57:11
 (epstopdf)                    size: 2675 bytes
-(epstopdf)             Command: <epstopdf --outfile=assets/UTC-eps-converted-to
-.pdf assets/UTC.eps>
+(epstopdf)             Command: <repstopdf --outfile=assets/UTC-eps-converted-t
+o.pdf assets/UTC.eps>
 (epstopdf)             \includegraphics on input line 32.
 Package epstopdf Info: Output file is already uptodate.
 File: assets/UTC-eps-converted-to.pdf Graphic file (type pdf)
@@ -1555,8 +1555,8 @@ Package epstopdf Info: Source file: <assets/UTC.eps>
 (epstopdf)             Output file: <assets/UTC-eps-converted-to.pdf>
 (epstopdf)                    date: 2026-06-07 11:57:11
 (epstopdf)                    size: 2675 bytes
-(epstopdf)             Command: <epstopdf --outfile=assets/UTC-eps-converted-to
-.pdf assets/UTC.eps>
+(epstopdf)             Command: <repstopdf --outfile=assets/UTC-eps-converted-t
+o.pdf assets/UTC.eps>
 (epstopdf)             \includegraphics on input line 32.
 Package epstopdf Info: Output file is already uptodate.
 File: assets/UTC-eps-converted-to.pdf Graphic file (type pdf)
@@ -1580,8 +1580,8 @@ Package epstopdf Info: Source file: <assets/UTC.eps>
 (epstopdf)             Output file: <assets/UTC-eps-converted-to.pdf>
 (epstopdf)                    date: 2026-06-07 11:57:11
 (epstopdf)                    size: 2675 bytes
-(epstopdf)             Command: <epstopdf --outfile=assets/UTC-eps-converted-to
-.pdf assets/UTC.eps>
+(epstopdf)             Command: <repstopdf --outfile=assets/UTC-eps-converted-t
+o.pdf assets/UTC.eps>
 (epstopdf)             \includegraphics on input line 33.
 Package epstopdf Info: Output file is already uptodate.
 File: assets/UTC-eps-converted-to.pdf Graphic file (type pdf)
@@ -1607,8 +1607,8 @@ Package epstopdf Info: Source file: <assets/UTC.eps>
 (epstopdf)             Output file: <assets/UTC-eps-converted-to.pdf>
 (epstopdf)                    date: 2026-06-07 11:57:11
 (epstopdf)                    size: 2675 bytes
-(epstopdf)             Command: <epstopdf --outfile=assets/UTC-eps-converted-to
-.pdf assets/UTC.eps>
+(epstopdf)             Command: <repstopdf --outfile=assets/UTC-eps-converted-t
+o.pdf assets/UTC.eps>
 (epstopdf)             \includegraphics on input line 34.
 Package epstopdf Info: Output file is already uptodate.
 File: assets/UTC-eps-converted-to.pdf Graphic file (type pdf)
@@ -1634,8 +1634,8 @@ Package epstopdf Info: Source file: <assets/UTC.eps>
 (epstopdf)             Output file: <assets/UTC-eps-converted-to.pdf>
 (epstopdf)                    date: 2026-06-07 11:57:11
 (epstopdf)                    size: 2675 bytes
-(epstopdf)             Command: <epstopdf --outfile=assets/UTC-eps-converted-to
-.pdf assets/UTC.eps>
+(epstopdf)             Command: <repstopdf --outfile=assets/UTC-eps-converted-t
+o.pdf assets/UTC.eps>
 (epstopdf)             \includegraphics on input line 35.
 Package epstopdf Info: Output file is already uptodate.
 File: assets/UTC-eps-converted-to.pdf Graphic file (type pdf)
@@ -1661,8 +1661,8 @@ Package epstopdf Info: Source file: <assets/UTC.eps>
 (epstopdf)             Output file: <assets/UTC-eps-converted-to.pdf>
 (epstopdf)                    date: 2026-06-07 11:57:11
 (epstopdf)                    size: 2675 bytes
-(epstopdf)             Command: <epstopdf --outfile=assets/UTC-eps-converted-to
-.pdf assets/UTC.eps>
+(epstopdf)             Command: <repstopdf --outfile=assets/UTC-eps-converted-t
+o.pdf assets/UTC.eps>
 (epstopdf)             \includegraphics on input line 36.
 Package epstopdf Info: Output file is already uptodate.
 File: assets/UTC-eps-converted-to.pdf Graphic file (type pdf)
@@ -1686,8 +1686,8 @@ Package epstopdf Info: Source file: <assets/UTC.eps>
 (epstopdf)             Output file: <assets/UTC-eps-converted-to.pdf>
 (epstopdf)                    date: 2026-06-07 11:57:11
 (epstopdf)                    size: 2675 bytes
-(epstopdf)             Command: <epstopdf --outfile=assets/UTC-eps-converted-to
-.pdf assets/UTC.eps>
+(epstopdf)             Command: <repstopdf --outfile=assets/UTC-eps-converted-t
+o.pdf assets/UTC.eps>
 (epstopdf)             \includegraphics on input line 37.
 Package epstopdf Info: Output file is already uptodate.
 File: assets/UTC-eps-converted-to.pdf Graphic file (type pdf)
@@ -1721,10 +1721,10 @@ Package logreq Info: Writing requests to 'doc.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42110 strings out of 473190
- 835042 string characters out of 5715799
- 1801403 words of memory out of 5000000
- 64708 multiletter control sequences out of 15000+600000
+ 42117 strings out of 473190
+ 835128 string characters out of 5715799
+ 1801429 words of memory out of 5000000
+ 64713 multiletter control sequences out of 15000+600000
  603961 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  113i,14n,115p,2365b,1865s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1732,7 +1732,7 @@ Here is how much of TeX's memory you used:
 cal/texlive/2025/texmf-dist/fonts/type1/public/lm/lmss12.pfb></usr/local/texliv
 e/2025/texmf-dist/fonts/type1/public/lm/lmss17.pfb></usr/local/texlive/2025/tex
 mf-dist/fonts/type1/public/lm/lmssbx10.pfb>
-Output written on doc.pdf (8 pages, 106703 bytes).
+Output written on doc.pdf (8 pages, 108118 bytes).
 PDF statistics:
  198 PDF objects out of 1000 (max. 8388607)
  177 compressed objects within 2 object streams
