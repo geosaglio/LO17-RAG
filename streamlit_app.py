@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import streamlit as st
+import subprocess
 
 from rag_pi.config import load_settings
 from rag_pi.rag import answer_question
@@ -25,6 +26,17 @@ try:
 except RuntimeError as exc:
     st.error(str(exc))
     st.stop()
+
+@st.cache_resource
+def run_ingest():
+    result = subprocess.run(
+        ["python", "-m", "scripts.ingest_legifrance", "--reset"],
+        capture_output=True,
+        text=True
+    )
+    return result.returncode
+
+run_ingest()
 
 question = st.chat_input("Posez une question sur la propriete intellectuelle")
 

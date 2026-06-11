@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from dotenv import load_dotenv
+import streamlit as st
 
 
 # Configuration centralisée du projet.
@@ -43,10 +44,10 @@ def load_settings() -> Settings:
     # Charge les variables définies dans .env puis lit l'environnement.
     load_dotenv()
 
-    llm_base_url = os.getenv("LLM_BASE_URL", "").strip()
-    llm_api_key = os.getenv("LLM_API_KEY", "").strip()
-    embedding_base_url = os.getenv("EMBEDDING_BASE_URL", "").strip()
-    embedding_api_key = os.getenv("EMBEDDING_API_KEY", "").strip()
+    llm_base_url = st.secrets["LLM_BASE_URL"]
+    llm_api_key = st.secrets["LLM_API_KEY"]
+    embedding_base_url = st.secrets["EMBEDDING_BASE_URL"]
+    embedding_api_key = st.secrets["EMBEDDING_API_KEY"]
 
     missing = [
         name
